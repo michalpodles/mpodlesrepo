@@ -2,7 +2,7 @@
 // Data: 21.03.2010
 // (C)2012 mgr Jerzy Wa³aszek
 //-----------------------------
-
+//zmiana
 program ludoolitle;
 
 type

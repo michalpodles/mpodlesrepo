@@ -1,0 +1,47 @@
+// Szyfrowanie z pseudolosowym odstêpem
+// Data: 20.08.2008
+// (C)2012 mgr Jerzy Wa³aszek
+//-----------------------------
+
+program prg;
+
+var
+  s : string;
+  i : integer;
+  X,a,m,c : qword;
+
+begin
+
+// definiujemy generator LCG
+
+  m := 3956280000;
+  a := 1978141;
+  c := 1309;
+
+// odczytujemy klucz i wiersz znaków
+
+  readln(X); readln(s);
+
+// zamieniamy ma³e litery na du¿e
+
+  s := upcase(s);
+
+// szyfrujemy
+
+  for i := 1 to length(s) do
+  begin
+
+// obliczamy kolejn¹ liczbê pseudolosow¹
+
+    X := (a * X + c) mod m;
+
+// szyfrujemy literkê
+
+    if s[i] in ['A'..'Z'] then s[i] := chr(65 + (ord(s[i]) - 65 + X mod 26) mod 26);
+  end;
+
+// wypisujemy zaszyfrowany tekst
+
+  writeln(s);
+  writeln;
+end. 

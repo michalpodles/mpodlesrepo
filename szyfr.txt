@@ -2,7 +2,7 @@
 // Data: 20.08.2008
 // (C)2012 mgr Jerzy Wa³aszek
 //-----------------------------
-
+//zmiana
 program prg;
 
 var

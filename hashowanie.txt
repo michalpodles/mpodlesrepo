@@ -2,7 +2,7 @@
 // Data: 16.06.2013
 // (C)2013 mgr Jerzy Wa³aszek
 //-----------------------------------
-
+//zmiana
 program hashing;
 
 // Funkcja haszuj¹ca

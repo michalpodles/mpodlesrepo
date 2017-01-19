@@ -1,0 +1,86 @@
+// Rozk³ad LU algorytmem Doolitle'a
+// Data: 21.03.2010
+// (C)2012 mgr Jerzy Wa³aszek
+//-----------------------------
+
+program ludoolitle;
+
+type
+  NReal = array of double;  // typ tablicy wierszy
+  MReal = array of NReal;   // typ tablicy wskaŸników
+
+const
+
+  eps = 1e-12;
+
+// Funkcja realizuje algorytm Doolitle'a rozk³adu LU
+//--------------------------------------------------
+function Doolitle(n : integer; A : MReal) : boolean;
+
+var
+  i,j,k : integer;
+  s     : double;
+
+begin
+
+  for j := 0 to n - 1 do
+  begin
+    if abs(A[j][j]) < eps then Exit(false);
+    for i := 0 to j do
+    begin
+      s := 0;
+      for k := 0 to i - 1 do
+        s := s + A[i][k] * A[k][j];
+      A[i][j] := A[i][j] - s;
+    end;
+    for i := j + 1 to n - 1 do
+    begin
+      s := 0;
+      for k := 0 to j - 1 do
+        s := s + A[i][k] * A[k][j];
+      A[i][j] := (A[i][j] - s) / A[j][j];
+    end;
+  end;
+  Doolitle := true;
+end;
+
+// Program g³ówny
+
+var
+  A     : MReal;
+  n,i,j : integer;
+
+begin
+
+  // odczytujemy stopieñ macierzy A
+
+  read(n);
+
+  // tworzymy macierz A o odpowiednich rozmiarach
+
+  SetLength(A,n);
+
+  for i := 0 to n - 1 do SetLength(A[i],n);
+
+  // odczytujemy dane dla macierzy A
+
+  for i := 0 to n - 1 do
+    for j := 0 to n - 1 do read(A[i][j]);
+
+  // wyznaczamy rozk³ad LU macierzy A
+
+  if Doolitle(n,A) then
+    for i := 0 to n - 1 do
+    begin
+      for j := 0 to n - 1 do write(A[i][j]:8:3,' ');
+      writeln;
+    end
+  else
+    writeln('DZIELNIK ZERO');
+
+  // usuwamy macierz z pamiêci
+
+  for i := 0 to n - 1 do SetLength(A[i],0);
+  SetLength(A,0);
+
+end. 
